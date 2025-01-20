@@ -3,12 +3,15 @@ const { connectToMongoDB } = require("./db");
 const Person = require("./models/person");
 const bodyParser = require("body-parser");
 const Job = require("./models/job");
+require("dotenv").config();
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json()); // this middleware save json data in req.body
 
-connectToMongoDB("mongodb://localhost:27017/curd-node").then(() =>
+// const MongoUrl = process.env.MONGO_URL_LOCAL;
+
+connectToMongoDB(process.env.MONGO_URL).then(() =>
   console.log("Database connected!")
 );
 
